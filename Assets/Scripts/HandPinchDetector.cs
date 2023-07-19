@@ -53,10 +53,11 @@ public class HandPinchDetector : MonoBehaviour
 
     private void SaveHandPrefab()
     {
-        Vector3 handPosition = ovrHandSaveable.transform.position;
+        //wenn wir absolute position wollen
+        //Vector3 handPosition = ovrHandSaveable.transform.position;
         Quaternion handRotation = ovrHandSaveable.transform.rotation;
 
-        GameObject newHandPrefab = Instantiate(ovrHandSaveable.gameObject, handPosition, handRotation);
+        GameObject newHandPrefab = Instantiate(ovrHandSaveable.gameObject, Vector3.zero, handRotation);
 
         string uniqueIdentifier = Guid.NewGuid().ToString();
         string prefabFileName = $"{prefabName}_{DateTime.Now:yyyyMMdd_HHmmss}_{uniqueIdentifier}.prefab";
