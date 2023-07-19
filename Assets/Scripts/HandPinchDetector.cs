@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net.NetworkInformation;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HandPinchDetector : MonoBehaviour
 {
@@ -13,10 +14,16 @@ public class HandPinchDetector : MonoBehaviour
     private bool pinchDetected = false;
     public string savePath = "Assets/SavedHandPositions/";
     public string prefabName = "SavedHandPositionPrefab";
+    public Image handSavedIndicator;
 
     float pinchInterval = 0.5f;
     int pinchCount = 0;
     float lastPinchTime = 0f;
+
+    void Start()
+    {
+        handSavedIndicator.CrossFadeAlpha(0f, 0f, false);
+    }
 
     void Update()
     {
@@ -69,5 +76,18 @@ public class HandPinchDetector : MonoBehaviour
         #endif
 
         Destroy(newHandPrefab);
+        DisplayImageSaveIndicator();
+    }
+
+    private void DisplayImageSaveIndicator()
+    {
+        StartCoroutine(DisplayImageForOneSecond());
+    }
+
+    private IEnumerator DisplayImageForOneSecond()
+    {
+        handSavedIndicator.CrossFadeAlpha(1f, 0.5f, false);
+        yield return new WaitForSeconds(1f);
+        handSavedIndicator.CrossFadeAlpha(0f, 0.5f, false);
     }
 }
