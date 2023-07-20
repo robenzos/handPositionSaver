@@ -77,6 +77,9 @@ namespace UnityEngine.XR.Hands.Samples.VisualizerSample
             if (m_UseOptimizedControls)
                 InputSystem.InputSystem.settings.SetInternalFeatureFlag("USE_OPTIMIZED_CONTROLS", true);
 #endif // ENABLE_INPUT_SYSTEM
+
+            m_LeftHandMesh.tag = "Left Hand";
+            m_RightHandMesh.tag = "Right Hand";
         }
 
         protected void OnEnable()
